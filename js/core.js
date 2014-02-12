@@ -110,9 +110,10 @@ var Nav = function( params ){
         console.log(curr);
         
         if( !curr.hasClass( 'current' ) ) {
+            $( this.$navEl ).removeClass( 'current' );
             curr.addClass( 'current' );
         }else{
-            $( this.$navEl ).removeClass( 'current' );
+            
             curr.addClass( 'current' );
         }
         
