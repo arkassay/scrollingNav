@@ -1,0 +1,93 @@
+/*--- Set Sprite Image ---*/
+#id0,
+#id1,
+#id2,
+#id3,
+#id4,
+#id5,
+#id6,
+#id7,
+#id8,
+#id9{
+	background-image : url("./sprite.png") ;
+}
+
+/*--- filename : img-benefits-protected.png ---*/
+#id0 {
+	width : 127px ;
+	height : 127px ;
+	background-position : left top ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-benefits-connected.png ---*/
+#id1 {
+	width : 127px ;
+	height : 127px ;
+	background-position : -133px top ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-benefits-access.png ---*/
+#id2 {
+	width : 127px ;
+	height : 127px ;
+	background-position : -266px top ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-swipe-left.png ---*/
+#id3 {
+	width : 64px ;
+	height : 64px ;
+	background-position : left -133px ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-swipe-right.png ---*/
+#id4 {
+	width : 64px ;
+	height : 64px ;
+	background-position : -70px -133px ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-star-on.png ---*/
+#id5 {
+	width : 71px ;
+	height : 66px ;
+	background-position : -140px -133px ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-star-off.png ---*/
+#id6 {
+	width : 71px ;
+	height : 66px ;
+	background-position : -294px -133px ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : img-star-half.png ---*/
+#id7 {
+	width : 71px ;
+	height : 66px ;
+	background-position : -217px -133px ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : btn-google-play.png ---*/
+#id8 {
+	width : 161px ;
+	height : 55px ;
+	background-position : -167px -205px ;
+	background-repeat : no-repeat ;
+}
+
+/*--- filename : btn-app-store.png ---*/
+#id9 {
+	width : 161px ;
+	height : 55px ;
+	background-position : left -205px ;
+	background-repeat : no-repeat ;
+}
