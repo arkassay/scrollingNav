@@ -160,32 +160,3 @@ var Nav = function( params ){
     
     return this;
 }
-
-var features = {
-    
-    init : function(){
-        
-    },
-    
-    click : function(){
-        
-    },
-    
-    showFeature : function( feature ){
-        
-    },
-    
-    hideFeature : function( feature ){
-        
-    }
-    
-    
-}
-
-var reviews = {
-    
-}
-
-var bannerScreen = {
-    
-}
