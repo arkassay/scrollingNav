@@ -2,8 +2,9 @@ var Nav = function( params ){
    
     this.options = {
        
-       sectionClass    : "section",
-       navClass     : "fixedNav",
+       sectionClass     : "section",
+       navClass         : "fixedNav",
+       content          : "content"
      
     }; 
         
@@ -20,6 +21,10 @@ var Nav = function( params ){
     this.$section = null;
     this.$navWrapper = null;
     this.$navEl = null;    
+    this.$contentWrapper = null;
+    
+    this.currentNav = null;
+    this.startOffset = 0;
     
     this.init = function(){
         
@@ -28,7 +33,8 @@ var Nav = function( params ){
         
         this.$navWrapper = $( '.' + this.options.navClass );
         this.$navEl = $('.' + this.options.navClass + ' li');
-
+        this.$contentWrapper = $('.' + this.options.content );
+        
         var self = this;
 
         //generate navigation
@@ -38,7 +44,8 @@ var Nav = function( params ){
                   name         : $( value ).attr( "data-title" ),
                   offset       : 0,
                   offsetBottom : 0, 
-                  navIndex     : index
+                  navIndex     : index,
+                  navCurrent   : false
               }
               
               
@@ -46,7 +53,10 @@ var Nav = function( params ){
               
         });
         
+        this.startOffset = this.$contentWrapper.offset().top;
+        
         this.updateOffsets();
+        this.updateNavigation();
         this.click();
         this.handlers();
     };
@@ -60,15 +70,6 @@ var Nav = function( params ){
 
             var index = $( this ).index() ;
             
-            $( self.$navEl ).removeClass( 'current' );
-            $( this ).addClass( 'current' );
-            
-            section = self.$section[ index ];
-            
-            $( self.$section ).removeClass( 'current' );
-            
-            $( section ).addClass( 'current' );
-            
             self.scrollTo( self.sections[ index ] );
         
         });
@@ -80,13 +81,42 @@ var Nav = function( params ){
     
     this.scrollTo = function( section ){
         
+        console.log(section.offset)
         $( 'html' ).animate( { scrollTop: section.offset }, 800);
         
     };
     
     this.updateNavigation = function(){
         //check scroll position and set appropriate menu link to "current"
-        var scrollOffset = $( 'html' ).scrollTop();   
+        var scrollOffset = $( window ).scrollTop(); 
+                           
+        for( i = 0, len = this.$section.length; i < len; i++ ){
+         
+            if( scrollOffset >= this.sections[ i ].offset && scrollOffset <= this.sections[ i ].offsetBottom ){
+                
+                this.currentNav = this.sections[ i ].navIndex;
+               
+            }
+             
+            this.updateStyles();
+        }
+        
+    };
+    
+    this.updateStyles = function(){
+        
+        var curr =  $( this.$navEl[ this.currentNav ] );
+        
+        console.log(curr);
+        
+        if( !curr.hasClass( 'current' ) ) {
+            curr.addClass( 'current' );
+        }else{
+            $( this.$navEl ).removeClass( 'current' );
+            curr.addClass( 'current' );
+        }
+        
+        
         
         
     };
@@ -96,12 +126,13 @@ var Nav = function( params ){
         
         $.each( this.$section, function( index, value ){
              
-              self.sections[ index ].offset = $( value ).offset().top - self.$navWrapper.height();
+              self.sections[ index ].offset = Math.floor( $( value ).offset().top - self.startOffset );
+              
               if( index < self.$section.length - 1 ){
                 var end = $( value ).next().offset();
-                self.sections[ index ].offsetBottom = end.top - self.$navWrapper.height() - 1;
+                self.sections[ index ].offsetBottom = Math.floor(end.top - self.startOffset - 1);
               }else{
-                self.sections[ index ].offsetBottom = $( 'html' ).height();
+                self.sections[ index ].offsetBottom = Math.floor( $( document ).height());
               }
        
         });        
@@ -113,12 +144,13 @@ var Nav = function( params ){
         
         //on resize - adjust height of sections
         $( window ).resize( function(){
-            self.updateOffsets();            
+            self.updateOffsets();        
+            self.updateNavigation();    
         });
         
         
         //on scroll update navigation if necessary
-        $( 'html' ).scroll( function(){
+        $( window ).scroll( function(){
             self.updateNavigation();
             
         });

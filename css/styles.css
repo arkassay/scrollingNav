@@ -23,3 +23,7 @@
 	padding: 10px;
 	
 }
+.fixedNav li.current{
+	color: white;
+	background: black;
+}
