@@ -53,7 +53,7 @@ var Nav = function( params ){
               
         });
         
-        this.startOffset = this.$contentWrapper.offset().top;
+        this.startOffset = this.$navWrapper.height();
         
         this.updateOffsets();
         this.updateNavigation();
